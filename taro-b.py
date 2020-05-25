@@ -40,6 +40,7 @@ def realtaro(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text=t)
     show_list = []
     show_list.append(InlineKeyboardButton("생일점", callback_data="생일점"))
+    show_list.append(InlineKeyboardButton("오늘의 운세", callback_data="오늘의 운세"))
     show_list.append(InlineKeyboardButton("취소", callback_data="취소"))
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
     update.message.reply_text("둘 중 고르세요", reply_markup=show_markup)
@@ -48,7 +49,11 @@ def realtaro(bot, update):
 def callback_get(bot, update):
     print("callback")
     if update.callback_query.data == "생일점":
-        bot.edit_message_text(text="/taro 가 선택되었습니다".format(update.callback_query.data),
+        bot.edit_message_text(text="/taro_b 가 선택되었습니다".format(update.callback_query.data),
+                              chat_id=update.callback_query.message.chat_id,
+                              message_id=update.callback_query.message.message_id)
+    if update.callback_query.data == "오늘의 운세":
+        bot.edit_message_text(text="/taro_d 가 선택되었습니다".format(update.callback_query.data),
                               chat_id=update.callback_query.message.chat_id,
                               message_id=update.callback_query.message.message_id)
     if update.callback_query.data == "심리":
@@ -65,11 +70,17 @@ def callback_get(bot, update):
                               message_id=update.callback_query.message.message_id)
 
 
-def taro(bot, update):
-    print("taro")
+def taro_b(bot, update):
+    print("taro_b")
     t = "태어난 연도, 월, 일을 입력하세요. ex)20000305"
     bot.sendMessage(chat_id=update.message.chat_id, text=t)
     update.message.reply_text("입력을 마치면 /sum 을 누르세요")
+
+def taro_d(bot, update):
+    print("taro_d")
+    t = "0부터 22까지 마음에 드는 숫자를 골라보세요!"
+    bot.sendMessage(chat_id=update.message.chat_id, text=t)
+    update.message.reply_text("입력을 마치면 /today 를 누르세요")
 
 def sum(bot, update):
     print("sum")
@@ -77,15 +88,32 @@ def sum(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text=str(dd))
 
     if dd == 10 :
-        #bot.sendMessage(chat_id=update.message.chat_id, photo=open('C:/Users/dudqh/Pictures/img/taro.10.jpg', 'rb'))
         bot.sendMessage(chat_id=update.message.chat_id, text = "당신의 성격 카드는 운명의 수레바퀴입니다! 이 카드는 재주있는 사람 어쩌구")
+        bot.send_photo(chat_id=update.message.chat_id, photo=open('C:/CookPython/taro10.png', 'rb'))
     #update.message.reply_text("결과를 보려면 /solution 누르세요")
     return dd
+
+def today(bot, update):
+    print("today")
+    value = today_2()
+    if value == '1' :
+        bot.sendMessage(chat_id = chat_id, text='오늘은 매우 행복한 날이네요!')
+        bot.send_photo(chat_id = chat_id, photo=open('C:/DB/picture3.gif','rb'))
+    elif value == 10 :
+        bot.sendMessage(chat_id = chat_id, text= '오늘은 별로')
 
 def get_message( bot, update):
     i , j=10000000, 0
 
-    if(int(update.message.text)>10000000) :
+    if (int(update.message.text)>= 0 and int(update.message.text)<9) :
+        i = update.message.text
+        num.insert(0, i)
+    elif (int(update.message.text) >= 10 and int(update.message.text) <= 22):
+        i = int(update.message.text)
+        num.insert(0, i)
+
+
+    if (int(update.message.text)>10000000) :
         i = int(update.message.text)
         result.insert(0, i // 10000)
         i = int(update.message.text) % 10000000
@@ -111,6 +139,10 @@ def solve():
 
     return result2[0] + result2[1] + result2[2] + result2[3]
 
+
+def today_2() :
+    return num[0]
+
 def solution(bot, update):
     print("solution")
     dd = solve()
@@ -119,19 +151,24 @@ def solution(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id, text = "당신은 아주 행운아에요")
 
 
+
 # 전역
 result = [0,0,0]
 pp = result[0]+result[1]+result[2]
 result2 = [0,0,0,0]
 dd= result2[0]+result2[1]+result2[2]+result2[3]
+num = [ 0]
+value = num[0]
 # 메인
 if __name__ == '__main__':
     bot.sendMessage(chat_id=chat_id, text='안녕 나는 타로, 심리 봇이야. 시작하기를 원하면 /test 를 눌러')
     dp.add_handler(CommandHandler('test', test))
     dp.add_handler(CallbackQueryHandler(callback_get))
     dp.add_handler(CommandHandler('realtaro', realtaro))
-    dp.add_handler(CommandHandler('taro', taro))
+    dp.add_handler(CommandHandler('taro_b', taro_b))
     dp.add_handler(CommandHandler('sum', sum))
+    dp.add_handler(CommandHandler('taro_d', taro_d))
+    dp.add_handler(CommandHandler('today', today))
     dp.add_handler(MessageHandler(Filters.text, get_message))
     updater.start_polling(timeout=3, clean=True)
     updater.idle()
