@@ -108,8 +108,6 @@ while (True):
     data6 = row[5]
     data7 = row[6]
 
-   # print("%5s %5s %5s %5s %5s %5s %5s" % (data1, data2, data3, data4, data5, data6, data7))
-
     if (data6==0 and data7==0) :
         turtle.goto(int(data6), int(data7))
         row = cur.fetchone()
