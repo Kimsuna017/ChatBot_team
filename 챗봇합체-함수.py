@@ -54,7 +54,7 @@ def taro_b(bot, update):
     print("taro_b")
     t = "태어난 연도, 월, 일을 입력하세요. ex)20000305"
     bot.sendMessage(chat_id=update.message.chat_id, text=t)
-    update.message.reply_text("입력을 마치면 /sum 을 누르세요")
+    #update.message.reply_text("입력을 마치면 /sum 을 누르세요")
 
 
 def taro_d(bot, update):
@@ -523,7 +523,7 @@ def D(bot, update):
 
 
 def get_message(bot, update):
-    text, i, j = update.message.text, 10000000, 0
+    text, i, j, uu = update.message.text, 10000000, 0, 0
 
     if '심리테스트' in text and '심리' in text:
         bot.send_message(chat_id=chat_id, text='/menu 를 입력해주세요')
@@ -612,6 +612,7 @@ def get_message(bot, update):
         i = int(update.message.text) % 1000
         i = int(update.message.text) % 100
         result.insert(2, i // 1)
+        uu = sum(bot, update)
 
     if (int(update.message.text) >= 0 and int(update.message.text) < 9):
         i = update.message.text
