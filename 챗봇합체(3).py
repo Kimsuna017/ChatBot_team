@@ -525,14 +525,6 @@ def today_2():
     return num[0]
 
 
-def solution(bot, update):
-    print("solution")
-    dd = solve()
-
-    if dd == 10:
-        bot.sendMessage(chat_id=update.message.chat_id, text="당신은 아주 행운아에요")
-
-
 def callback_get(bot, update):
     print("callback")
 
@@ -916,14 +908,16 @@ def get_message(bot, update):
         i = int(update.message.text) % 1000
         i = int(update.message.text) % 100
         result.insert(2, i // 1)
+        uu = sum(bot, update)
 
     if (int(update.message.text) >= 0 and int(update.message.text) <= 9):
         i = int(update.message.text)
         num.insert(0, i)
-
+        uu = today(bot, update)
     elif (int(update.message.text) >= 10 and int(update.message.text) <= 22):
         i = int(update.message.text)
         num.insert(0, i)
+        uu = today(bot, update)
 
 
 # 전역
