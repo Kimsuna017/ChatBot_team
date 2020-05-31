@@ -3,9 +3,9 @@ import time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-my_token = '1184525831:AAGBPIt5EMYsiekswv5tJQ7R2jJnFm8aGII'
-chat_id = 1260470636
-updater = Updater(token='1184525831:AAGBPIt5EMYsiekswv5tJQ7R2jJnFm8aGII')
+my_token = '1173273675:AAGqVv9pWGhbqe4FKdbj_u8yJp92gAU_em8'
+chat_id = 1132917740
+updater = Updater(token='1173273675:AAGqVv9pWGhbqe4FKdbj_u8yJp92gAU_em8')
 bot = telegram.Bot(token=my_token)
 updates = bot.getUpdates()
 dp = updater.dispatcher
@@ -54,7 +54,7 @@ def taro_b(bot, update):
     print("taro_b")
     t = "태어난 연도, 월, 일을 입력하세요. ex)20000305"
     bot.sendMessage(chat_id=update.message.chat_id, text=t)
-    update.message.reply_text("입력을 마치면 /sum 을 누르세요")
+    #update.message.reply_text("입력을 마치면 /sum 을 누르세요")
 
 
 def taro_d(bot, update):
@@ -62,7 +62,7 @@ def taro_d(bot, update):
 
     t = "0부터 22까지 마음에 드는 숫자를 골라보세요!"
     bot.sendMessage(chat_id=update.message.chat_id, text=t)
-    update.message.reply_text("입력을 마치면 /today 를 누르세요")
+    #update.message.reply_text("입력을 마치면 /today 를 누르세요")
 
 
 def sum(bot, update):
@@ -72,13 +72,13 @@ def sum(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text=str(dd))
 
     if dd == 0 or dd == 22:
-        bot.send_photo(chat_id=update.message.chat_id,
+        bot.send_photo(chat_id=chat_id,
                        photo='http://thumb2.photo.cloud.naver.com/3472427554648900385?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9xznrQu88T7i+4rW7SUoCWhrTO2CrHCON1HbumbfbmzKj15Ish3oECjAndZw4lh7MLQU=&authtoken=6mYNrDp3UNwwAHM+YPfruAI=')
-        bot.sendMessage(chat_id=update.message.chat_id,
+        bot.sendMessage(chat_id=chat_id,
                         text="당신의 성격카드는 '광대' 입니다! 당신은 본성이 자유로운 사람이며, 무거운 삶의 과제를 안고 살지만 단순 소박합니다. 때로는 미숙하고 부주의하다는 평을 들을 수 있으나 하나에 빠지면 열정적으로 몰입합니다!")
     elif dd == 1:
         bot.send_photo(chat_id=update.message.chat_id,
-                       photo='http://thumb2.photo.cloud.naver.com/3472427554648076832?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9x4UprD0hOQp9Fc4yStZAdFF39ZikKmKtPyREkbJRxQ++Fdtp67aMTzL2RqRZGnRe+gU=&authtoken=O9FvP4XpOUH2tbLIv/Wz5gI=')
+                       photo='http://thumb1.photo.cloud.naver.com/3472427554648076832?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9x4UprD0hOQp9Fc4yStZAdFF39ZikKmKtPyREkbJRxQ++Fdtp67aMTzL2RqRZGnRe+gU=&authtoken=Yob6XDaE5Zvmi/SefRU3PgI=')
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="당신의 성격 카드는 '마법사' 입니다! 이 카드는 재주있는 사람을 말하며, 독창적이고 창조적이며 상상력이 뛰어남을 상징합니다. 능수능란한 재주가 있어 꾀를 부려도 남이 잘 알아채지 못합니다!")
     elif dd == 2:
@@ -204,9 +204,9 @@ def today(bot, update):
         time.sleep(1.5)
         update.message.reply_text("또다른 테스트를 하고 싶다면 /test 를 눌러보세요!")
 
-    if value == 1:
+    elif value == 1:
         bot.send_photo(chat_id=chat_id,
-                       photo='http://thumb2.photo.cloud.naver.com/3472427554648076832?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9x4UprD0hOQp9Fc4yStZAdFF39ZikKmKtPyREkbJRxQ++Fdtp67aMTzL2RqRZGnRe+gU=&authtoken=O9FvP4XpOUH2tbLIv/Wz5gI=')
+                       photo='http://thumb1.photo.cloud.naver.com/3472427554648076832?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9x4UprD0hOQp9Fc4yStZAdFF39ZikKmKtPyREkbJRxQ++Fdtp67aMTzL2RqRZGnRe+gU=&authtoken=Yob6XDaE5Zvmi/SefRU3PgI=')
         t = "오늘의 카드는 The Magician!"
         bot.sendMessage(chat_id=update.message.chat_id, text=t)
         time.sleep(1.0)
@@ -916,14 +916,16 @@ def get_message(bot, update):
         i = int(update.message.text) % 1000
         i = int(update.message.text) % 100
         result.insert(2, i // 1)
+        uu = sum(bot, update)
 
     if (int(update.message.text) >= 0 and int(update.message.text) < 9):
         i = int(update.message.text)
         num.insert(0, i)
-
+        uu = today(bot, update)
     elif (int(update.message.text) >= 10 and int(update.message.text) <= 22):
         i = int(update.message.text)
         num.insert(0, i)
+        uu = today(bot, update)
 
 
 # 전역
