@@ -1,4 +1,5 @@
 import telegram
+import sqlite3
 import time
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler, ConversationHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
@@ -12,7 +13,10 @@ bot = telegram.Bot(token=my_token)
 updates = bot.getUpdates()
 dp = updater.dispatcher
 
-TEST, REALTARO, MENU, TARO_B, TARO_D, DOOR, ANIMAL, PICTURE, NUMBER, GREEN, BLUE, RED, PURPLE, GREY, A, B, C, D, CANCEL = range(19)
+con = sqlite3.connect("C:/sqlite/chatbot")  ##DB생성
+cur = con.cursor()  ##커서생성
+
+TEST, REALTARO, MENU, TARO_B, TARO_D, DOOR, ANIMAL, PICTURE, NUMBER, GREEN, BLUE, RED, PURPLE, GREY, A, B, C, D, CANCEL, QA, USER, RECOMMAND, DETAIL, = range(23)
 
 
 # 메세지 업데이트
@@ -46,25 +50,29 @@ def sum(bot, update):
                        photo='http://thumb2.photo.cloud.naver.com/3472427554648900385?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9xznrQu88T7i+4rW7SUoCWhrTO2CrHCON1HbumbfbmzKj15Ish3oECjAndZw4lh7MLQU=&authtoken=6mYNrDp3UNwwAHM+YPfruAI=')
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="당신의 성격카드는 '광대' 입니다! 당신은 본성이 자유로운 사람이며, 무거운 삶의 과제를 안고 살지만 단순 소박합니다. 때로는 미숙하고 부주의하다는 평을 들을 수 있으나 하나에 빠지면 열정적으로 몰입합니다!")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id= update.message.chat_id , text = "처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 1:
         bot.send_photo(chat_id=update.message.chat_id,
                        photo='http://thumb1.photo.cloud.naver.com/3472427554648076832?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9x4UprD0hOQp9Fc4yStZAdFF39ZikKmKtPyREkbJRxQ++Fdtp67aMTzL2RqRZGnRe+gU=&authtoken=Yob6XDaE5Zvmi/SefRU3PgI=')
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="당신의 성격 카드는 '마법사' 입니다! 이 카드는 재주있는 사람을 말하며, 독창적이고 창조적이며 상상력이 뛰어남을 상징합니다. 능수능란한 재주가 있어 꾀를 부려도 남이 잘 알아채지 못합니다!")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 2:
         bot.send_photo(chat_id=update.message.chat_id,
                        photo='http://thumb2.photo.cloud.naver.com/3472427554648068640?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9x1kyUvVUk1/5PADuOWqm3IPKf4Hib+AH+h1o8q0T8ugnax4Gxlp43Iw34tqTSQcAbwU=&authtoken=CGx9J1WaRTo0R1oEIxxfygI=')
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="당신의 성격 카드는 '여성 대사제' 입니다! 이 카드는 지혜로운 사람을 말하며, 객관적이며 상황판단을 잘하는 것을 상징합니다. 주로 통찰력있고 직관적으로 행동하지만 사람을 주관적으로 대할 수 있어 상대의 불만을 사기도 합니다. ")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 3:
         bot.send_photo(chat_id=update.message.chat_id,
                        photo='http://thumb2.photo.cloud.naver.com/3472427554648048161?type=m3&setidc=2&filelink=vbDHg5Gj4B1dZofT7fR9xw0MQxY7FRdkeMIj+dj+WhOVGbbU3LJGa/Mfq7u1y5p0SXUAgUkmolgif+YD3Mok7AU=&authtoken=kUPe8Nj1Oc+hM4vUf4ubhAI=')
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="당신의 성격 카드는 '여제' 입니다! 이 카드는 부드러운 에너지가 발달한 사람을 말하며, 성취지향적이고 실용적입니다. 다른 사람을 돌보고 그들이 잘 성장할 수 있도록 돕고자 합니다!")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 4:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -74,7 +82,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '황제' 입니다! 이 카드는 가장을 상징하며 가진 것을 지키려고 앴는 사람을 말합니다. 세속적인 힘과 안정, 권위, 확신, 이성을 상징합니다. 남성일 경우 가부장적인 인물을 뜻합니다!")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 5:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -84,7 +93,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '교황' 입니다! 이 카드는 진리를 가르치려는 교육자를 상징하며 주로 자비로우며 동정심이 강합니다. 주관이 뚜렷하며 의식을 중시하고 원칙을 따르려고 합니다. 주로 집단과 행동을 같이하고 지식 획득과 깨달음을 위해 노력합니다!")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 6:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -94,7 +104,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '연인' 입니다! 이 카드는 인간관계를 중시하며 사랑이나 미에 높은 사람을 말합니다. 자신을 꾸미는 능력이 있고 이를 완성시키며 조화를 이루려고 합니다. 깊은 감정을 느끼며, 누군가와 그 정서를 교류하고 싶어합니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 7:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -104,7 +115,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '전차' 입니다! 이 카드는 역경극복의 의지를 나타냅니다. 이 카드를 성격카드로 가진 사람은 한 가지에 집중하기 보다는 여러가지 일에 관심을 가지며, 실제로 그 일을 모두 해내는 경향이 있습니다. 그렇기 때문에 마음의 변화에 귀 기울이는 것이 중요합니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 8:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -114,7 +126,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '힘' 입니다! 이 카드는 외유내강형의 사람과 화난 사람을 진정시킬 줄 아는 사람을 말하며, 이 사람들은 주로 내적 용기와 힘, 결단력, 확신, 도전적 태도를 지닙니다. 그러나 내면의 두려움과 맞서야하는 과제를 안고 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 9:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -124,7 +137,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '은둔자' 입니다! 이 카드는 관심이 내면에 있는 사람이며 외부대상이나 환경에 신경을 쓰지 않는 편입니다. 감정을 억제하며 사려깊고 신중해 조언하기를 좋아합니다. 행동이 빠르지 않고 고요하며, 간혹 지나치게 침울한 사람도 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 10:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -134,7 +148,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '운명의 수레바퀴' 입니다! 이 카드는 재주있는 사람을 가리키며 행위의 결과가 자신에게 돌아오니 조심성을 가질 필요가 있습니다. 진리라 생각하는 분야를 배워 타인을 위해 가르치거나 공공의 이익을 위해 사용하는 것이 좋습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 11:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -144,7 +159,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '정의' 입니다! 이 카드는 공평무사, 균형 그리고 조화를 이루려는 것을 나타냅니다. 이 카드를 성격카드로 지닌 사람은 분별력이 있으며 판단 후에는 실쳔력이 빠르고 올바름, 미덕, 명예를 중시하는 경향이 있습니다. 그러나 대인관계에서도 판단이 앞선 나머지 정서적인 면을 간과할 수 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 12:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -154,7 +170,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '매달린 사람' 입니다! 이 카드를 성격 카드를 지닌 사람은 말과 행동이 느리며 둔감한 편이라 정성적 표현이 부족한 경향이 있습니다. 그러나 내면에서는 많은 것이 일어나기 때문에 인내심을 가지고 지켜볼 필요가 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 13:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -164,7 +181,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '죽음' 입니다! 이 카드는 변형을 일으키는 사람을 말합니다. 신체적인 죽음이 아니라 새로운 것을 위해 과거의 것을 과감히 제거하는 사람으로 익수한 상황을 유지하기 보다는 새 상황의 시작을 즐기고 새로움을 추구합니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 14:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -174,7 +192,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '절제' 입니다! 이 카드를 성격 카드로 가진 사람은 자기통제와 검소한 태도를 통해 목표를 달성합니다. 환경에 순응하고 주변과 조화를 이루며 큰 목표를 위해 힘을 합칠 줄 압니다. 그러나 역작용이 일어나면 중독에 빠질 수 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 15:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -184,7 +203,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '악마' 입니다! 이 카드는 집착이 강한 사람을 말하며, 자신과 관련된 대상에 대해 걱정을 많이 합니다. 실패 경험을 너무 오래 생각하면 자신과 주변이 힘들어 질 수 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 16:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -194,7 +214,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '탑' 입니다! 이 카드는 변화의 충격으르 강하게 받는 사람을 말하며, 진실을 인식하고 맞지 않는 경우에는 가진 것을 모두 버릴 수 있는 과감함을 지니고 있습니다. 과거 대인 관계를 꾸준히 유지하기 보다 변화를 추구하는 경향이 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 17:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -204,7 +225,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '별' 입니다! 이 카드는 어둠속에 희망의 등불이 되려하는 사람을 말합니다. 주로 사람들에게 힘이 되고 싶어하며 신념이 있고 낙천적, 긍적적입니다. 그러나 그렇기 때문에 현재의 어려운 상황을 간과할 우려가 있습니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 18:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -214,7 +236,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 운명의 '달' 입니다! 이 카드를 성격 카드로 지닌 사람은 마음이 자주 바뀌며 의심이 많습니다. 자신이 너무 순수해 잘 속는다고 생각합니다. 내적 변화를 인정하고 즐기는 방법을 찾는 것이 중요합니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 19:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -224,7 +247,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '태양' 입니다! 이 카드는 어린애처럼 순수한 사람을 말하며, 자신의 역량보다 더 큰 일을 해내는 용기와 믿음이 있습니다. 고생이 많아도 특별한 보살핌 또한 경험했을 가능성이 있으며 이에 대한 감사를 잊으면 안됩니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 20:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -234,7 +258,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '심판' 입니다! 이 카드는 옳고 그름에 대한 판단이 바르고,정의로운 사람을 말합니다. 희생을 감수해 진리를 드러내고자 하며 억울한 사람을 보면 무심해지기 어려워 적극 개입합니다.")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     elif dd == 21:
 
         bot.send_photo(chat_id=update.message.chat_id,
@@ -244,7 +269,8 @@ def sum(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id,
 
                         text="당신의 성격 카드는 '세계' 입니다! 이 카드는 어떠한 환경에서도 완성을 이루려는 사람을 말하며 주로 완벽주의자고 시야가 넓습니다. 가족이 도움을 구하면 자기 일처럼 돕습니다. ")
-
+        time.sleep(1.0)
+        bot.sendMessage(chat_id=update.message.chat_id, text="처음으로 돌아가려면 /start 를 눌러주세요!")
     return dd
 
 
@@ -928,26 +954,38 @@ def today_2():
 
 # 동물관련 심리테스트
 
-def crawl_animal(bot, update):
+def door1(bot, update):
     query = update.callback_query
 
     bot.edit_message_text(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        text=u"이 사진에는 총 9마리의 동물, 곤충 등이 있는데요!"
+        text=u"당신의 눈앞에 5가지 색깔 문이 있어요." + "\n" + "이 중에서 당신의 마음에 드는 문을 한가지 선택해주세요."
     )
 
-    bot.send_photo(
+    show_list = []
+
+    show_list.append(InlineKeyboardButton("초록", callback_data=str(GREEN)))
+
+    show_list.append(InlineKeyboardButton("파랑", callback_data=str(BLUE)))
+
+    show_list.append(InlineKeyboardButton("빨강", callback_data=str(RED)))
+
+    show_list.append(InlineKeyboardButton("보라", callback_data=str(PURPLE)))
+
+    show_list.append(InlineKeyboardButton("회색", callback_data=str(GREY)))
+
+    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
+
+    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
+
+    bot.edit_message_reply_markup(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        photo= u'https://pbs.twimg.com/media/DY9aTtFVQAAm2aG.jpg'
+        reply_markup=show_markup
     )
 
-    bot.send_message(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        text=u"이 중 가장 먼저 보이는 동물은 무엇인가요?"
-    )
+    return CallbackQueryHandler(callback_get)
 
 
 #숫자관련 심리테스트
@@ -1012,39 +1050,27 @@ def yes4(bot, update):
 
 
 # 문관련 심리테스트
-def door(bot, update):
+def crawl_animal(bot, update):
     query = update.callback_query
     print("test")
-
-    show_list = []
-
-    show_list.append(InlineKeyboardButton("초록", callback_data=str(GREEN)))
-
-    show_list.append(InlineKeyboardButton("파랑", callback_data=str(BLUE)))
-
-    show_list.append(InlineKeyboardButton("빨강", callback_data=str(RED)))
-
-    show_list.append(InlineKeyboardButton("보라", callback_data=str(PURPLE)))
-
-    show_list.append(InlineKeyboardButton("회색", callback_data=str(GREY)))
-
-    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
 
     bot.edit_message_text(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        text=u"당신의 눈앞에 5가지 색깔 문이 있어요." + "\n" + "이 중에서 당신의 마음에 드는 문을 한가지 선택해주세요."
+        text=u"이 사진에는 총 9마리의 동물, 곤충 등이 있는데요!"
     )
 
-    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
-
-    bot.edit_message_reply_markup(
+    bot.send_photo(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        reply_markup=show_markup
+        photo=u'https://pbs.twimg.com/media/DY9aTtFVQAAm2aG.jpg'
     )
 
-    return CallbackQueryHandler(callback_get)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"이 중 가장 먼저 보이는 동물은 무엇인가요?"
+    )
 
 
 #문심리테스트결과1
@@ -1073,13 +1099,6 @@ def green(bot, update):
         text=u"하지만 새로운 변화를 좋아하지 않고" + "\n" + "선택이나 결정을 쉽게 하지 못하는 우유부단한 성격이 있어요!"
     )
 
-    time.sleep(0.7)
-
-    bot.send_message(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        text=u"하지만 새로운 변화를 좋아하지 않고" + "\n" + "선택이나 결정을 쉽게 하지 못하는 우유부단한 성격이 있어요!"
-    )
 
     time.sleep(1.5)
 
@@ -1720,6 +1739,8 @@ def test(bot, update):
 
     show_list.append(InlineKeyboardButton("심리", callback_data=str(MENU)))
 
+    show_list.append(InlineKeyboardButton("Q&A", callback_data=str(QA)))
+
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
 
     bot.edit_message_text(
@@ -1793,6 +1814,38 @@ def taro_d(bot, update):
         text=u"0부터 22까지 마음에 드는 숫자를 골라보세요!"
     )
 
+#Q&A 메뉴
+
+def question(bot, update):
+    query = update.callback_query
+
+    print("question")
+
+    show_list = []
+
+    show_list.append(InlineKeyboardButton("1. 총 이용자수", callback_data=str(USER)))
+
+    show_list.append(InlineKeyboardButton("2. 인기 메뉴", callback_data=str(RECOMMAND)))
+
+    show_list.append(InlineKeyboardButton("3.세부사항", callback_data=str(DETAIL)))
+
+    show_list.append(InlineKeyboardButton("4.취소", callback_data=str(CANCEL)))
+
+    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
+
+    bot.edit_message_text(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"궁금한 것을 골라줘!"
+    )
+
+    bot.edit_message_reply_markup(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        reply_markup=show_markup
+    )
+    return CallbackQueryHandler(callback_get)
+
 
 # 심리테스트선택시 호출되는 함수
 def test_menu(bot, update):
@@ -1842,60 +1895,411 @@ def cancel(bot,update):
 
 # 버튼 처리할 함수
 def callback_get(bot, update):
+    query = update.callback_query
+
+    print("callback")
+
+    con, cur = None, None
+    global birth, tod, door, animal, photo, number, Max, Min, Sum
+
+    con = sqlite3.connect("C:/sqlite/chatbot")  ##DB생성
+    cur = con.cursor()  ##커서생성
+
     if update.callback_query.data == str(REALTARO):
         uu = realtaro(bot, update)
-        print("hi")
-        return 0
+
     elif update.callback_query.data == str(MENU):
         uu = test_menu(bot, update)
-        return 0
+    elif update.callback_query.data == str(QA):
+        uu = question(bot, update)
+    elif update.callback_query.data == str(USER):
+        uu = user(bot, update)
+    elif update.callback_query.data == str(RECOMMAND):
+        uu = recommand(bot, update)
+    elif update.callback_query.data == str(DETAIL):
+        uu = detail(bot, update)
     elif update.callback_query.data == str(TARO_B):
+        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('타로','생일점','')"
+        cur.execute(sql)
         uu = taro_b(bot, update)
-        return 0
+
     elif update.callback_query.data == str(TARO_D):
+        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('타로','오늘의운세','')"
+        cur.execute(sql)
         uu = taro_d(bot, update)
-        return 0
-    elif update.callback_query.data == str(DOOR):
-        uu = door(bot, update)
-        return 0
+
+    # elif update.callback_query.data == str(DOOR):
+    #     sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','문','')"
+    #     cur.execute(sql)
+    #     uu = door(bot, update)
+
     elif update.callback_query.data == str(ANIMAL):
+        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','동물','')"
+        cur.execute(sql)
         crawl_animal(bot, update)
-        return 0
+
+    elif update.callback_query.data == str(DOOR):
+        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','문','')"
+        cur.execute(sql)
+        uu = door1(bot, update)
+
+
     elif update.callback_query.data == str(PICTURE):
+        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','사진','')"
+        cur.execute(sql)
         uu = picture(bot, update)
-        return 0
+
     elif update.callback_query.data == str(NUMBER):
+        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','숫자','')"
+        cur.execute(sql)
         uu = number_check(bot, update)
-        return 0
+
     elif update.callback_query.data == str(GREEN):
         uu = green(bot, update)
-        return 0
     elif update.callback_query.data == str(BLUE):
         uu= blue(bot, update)
-        return 0
     elif update.callback_query.data == str(RED):
         uu = red(bot, update)
-        return 0
     elif update.callback_query.data == str(PURPLE):
         uu = purple(bot, update)
-        return 0
     elif update.callback_query.data == str(GREY):
         uu = grey(bot, update)
-        return 0
     elif update.callback_query.data == str(A):
         uu = a(bot, update)
-        return 0
     elif update.callback_query.data == str(B):
         uu = b(bot, update)
-        return 0
     elif update.callback_query.data == str(C):
         uu = c(bot, update)
-        return 0
     elif update.callback_query.data == str(D):
         uu = d(bot, update)
-        return 0
-    elif update.callback_query.data == str(CANCEL):
-        return 0
+    #elif update.callback_query.data == str(CANCEL):
+
+#DB 저장 및 값가져오기
+    con.commit()
+
+    cur.execute("select count(*) from chatbot")
+    data = cur.fetchone()
+    Sum = data[0]
+    print(Sum)
+    cur.execute("select count(*) from chatbot where sel2='생일점'")
+    data = cur.fetchone()
+    birth = data[0]
+    print(birth)
+    #bot.sendMessage(chat_id=update.message.chat_id, text=birth)
+    cur.execute("select count(*) from chatbot where sel2='오늘의운세'")
+    data = cur.fetchone()
+    tod=data[0]
+    print(tod)
+    cur.execute("select count(*) from chatbot where sel2='문'")
+    data = cur.fetchone()
+    door=data[0]
+    print(door)
+    cur.execute("select count(*) from chatbot where sel2='동물'")
+    data = cur.fetchone()
+    animal=data[0]
+    print(animal)
+    cur.execute("select count(*) from chatbot where sel2='사진'")
+    data = cur.fetchone()
+    photo=data[0]
+    print(photo)
+    cur.execute("select count(*) from chatbot where sel2='숫자'")
+    data = cur.fetchone()
+    number=data[0]
+    print(number)
+
+
+
+
+# 이용자수
+
+def user(bot, update):
+    query = update.callback_query
+
+    print("user")
+
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"저희 챗봇의 총 이용자 수가 궁금하시다구요?"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'저희 챗봇의 총 이용자 수는 \"' + str(Sum) + '\"명이에요!'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"더 많은 이용 부탁 드릴게요!!"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"또다른 궁금한 사항이 있다면 /question 을 눌러주세요~"
+    )
+    time.sleep(0.5)
+
+
+
+# 인기 메뉴
+
+def recommand(bot, update):
+    query = update.callback_query
+
+    print("recommand")
+
+    count=0
+
+    #Sum = birth + tod + door + animal + photo + number
+
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"무슨 메뉴를 골라야 할지 고민이면"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"가장 인기있는 메뉴를 해보는건 어떨까요?"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'저희 타로심리봇 이용 횟수는 총 \"' + str(Sum) +'\"명인데요!'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"그 중"
+    )
+    time.sleep(0.5)
+
+
+    if (birth >= tod and birth >= door and birth >= animal and birth >= photo and birth >= number):
+        Max = birth
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u'타로테마의 생일점 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
+        )
+        time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /taro_b 를 눌러주세요!"
+        )
+        time.sleep(0.5)
+        count+=1
+    if (tod >= birth and tod >= door and tod >= animal and tod >= photo and tod >= number):
+        Max = tod
+        if(count!=0):
+            bot.send_message(
+                chat_id=query.message.chat_id,
+                message_id=query.message.message_id,
+                text=u"그리고 공동으로"
+            )
+            time.sleep(0.5)
+        bot.edit_message_text(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u'타로테마의 오늘의 운세 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
+        )
+        time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /taro_d 를 눌러주세요!"
+        )
+        time.sleep(0.5)
+        count += 1
+    if (door >= birth and door >= tod and door >= animal and door >= photo and door >= number):
+        Max = door
+        if (count != 0):
+            bot.send_message(
+                chat_id=query.message.chat_id,
+                message_id=query.message.message_id,
+                text=u"그리고 공동으로"
+            )
+            time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u'심리테마의 문 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
+        )
+        time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /door 를 눌러주세요!"
+        )
+        time.sleep(0.5)
+        count += 1
+    if (animal >= birth and animal >= tod and animal >= door and animal >= photo and animal >= number):
+        Max = animal
+        if (count != 0):
+            bot.send_message_(
+                chat_id=query.message.chat_id,
+                message_id=query.message.message_id,
+                text=u"그리고 공동으로"
+            )
+            time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u'심리테마의 동물 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
+        )
+        time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /animal 를 눌러주세요!"
+        )
+        time.sleep(0.5)
+        count += 1
+    if (photo >= birth and photo >= tod and photo >= door and photo >= animal and photo >= number):
+        Max = photo
+        if (count != 0):
+            bot.send_message(
+                chat_id=query.message.chat_id,
+                message_id=query.message.message_id,
+                text=u"그리고 공동으로"
+            )
+            time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u'심리테마의 사진 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
+        )
+        time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /photo 를 눌러주세요!"
+        )
+        time.sleep(0.5)
+        count += 1
+    if (number >= birth and number >= tod and number >= door and number >= animal and number >= photo):
+        Max = number
+        if (count != 0):
+            bot.send_message(
+                chat_id=query.message.chat_id,
+                message_id=query.message.message_id,
+                text=u"그리고 공동으로"
+            )
+            time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u'심리테마의 숫자 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
+        )
+        time.sleep(0.5)
+        bot.send_message(
+            chat_id=query.message.chat_id,
+            message_id=query.message.message_id,
+            text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /number 를 눌러주세요!"
+        )
+        time.sleep(0.5)
+        count += 1
+
+    #bot.sendMessage(chat_id=update.message.chat_id, text='추천드려요~~')
+    #time.sleep(1.0)
+
+
+    time.sleep(1.0)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"또다른 궁금한 사항이 있다면 /question 을 눌러주세요~"
+    )
+
+
+
+# 세부사항
+
+def detail(bot, update):
+    query = update.callback_query
+
+    print("detail")
+
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"각 테마별 이용자 수를 알고 싶으시다구요?"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"걱정하지 마세요! 제가 알려 드릴게요!!"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'저희 타로심리봇 이용 횟수는 총 \"' + str(Sum) + '\"명인데요!'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"그 중"
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'생일점 이용자 수는 \"' + str(birth) + '\"명'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'오늘의 운세 이용자 수는 \"' + str(tod) + '\"명'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'문 메뉴 이용자 수는 \"' + str(door) + '\"명'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'동물 메뉴 이용자 수는 \"' + str(animal) + '\"명'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'사진 메뉴 이용자 수는 \"' + str(photo) + '\"명'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u'숫자 메뉴 이용자 수는 \"' + str(number) + '\"명'
+    )
+    time.sleep(0.5)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"입니다! 더 다양한 메뉴들 많이 이용해주세요~"
+    )
+    time.sleep(1.0)
+    bot.send_message(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        text=u"또다른 궁금한 사항이 있다면 /question 을\n어떤 메뉴를 고릴지 결정하셨다면 /test 를 눌러주세요~"
+    )
+
+
 
 
 # 메인 함수
@@ -1916,9 +2320,13 @@ if __name__ == '__main__':
         states={
             REALTARO: [CallbackQueryHandler(realtaro)],
             MENU: [CallbackQueryHandler(test_menu)],
+            QA: [CallbackQueryHandler(question)],
+            USER: [CallbackQueryHandler(user)],
+            RECOMMAND: [CallbackQueryHandler(recommand)],
+            DETAIL: [CallbackQueryHandler(detail)],
             TARO_B: [CallbackQueryHandler(taro_b)],
             TARO_D: [CallbackQueryHandler(taro_d)],
-            DOOR: [CallbackQueryHandler(door)],
+            DOOR: [CallbackQueryHandler(door1)],
             ANIMAL: [CallbackQueryHandler(crawl_animal)],
             PICTURE: [CallbackQueryHandler(picture)],
             NUMBER: [CallbackQueryHandler(number_check)],
