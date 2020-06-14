@@ -1,4 +1,3 @@
-from datetime import datetime
 import telegram
 import sqlite3
 import time
@@ -7,21 +6,17 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 
-my_token ='1184525831:AAGBPIt5EMYsiekswv5tJQ7R2jJnFm8aGII'
-chat_id = 1260470636
-updater = Updater(token='1184525831:AAGBPIt5EMYsiekswv5tJQ7R2jJnFm8aGII')
+my_token ='1075204229:AAGvsmDj3SiyDnWc4vm3S83DZLCTYLSq1uA'
+chat_id = 1132917740
+updater = Updater(token='1075204229:AAGvsmDj3SiyDnWc4vm3S83DZLCTYLSq1uA')
 bot = telegram.Bot(token=my_token)
 updates = bot.getUpdates()
 dp = updater.dispatcher
 
-<<<<<<< HEAD:챗봇합체(11).py
 con = sqlite3.connect("C:/sqlite/chatbot")  ##DB생성
 cur = con.cursor()  ##커서생성
 
 TEST, REALTARO, MENU, TARO_B, TARO_D, DOOR, ANIMAL, PICTURE, NUMBER, GREEN, BLUE, RED, PURPLE, GREY, A, B, C, D, CANCEL, QA, USER, RECOMMAND, DETAIL, = range(23)
-=======
-TEST, REALTARO, MENU, TARO_B, TARO_D, DOOR, ANIMAL, PICTURE, NUMBER, GREEN, BLUE, RED, PURPLE, GREY, QA, USER, RECOMMAND, DETAIL, A, B, C, D, CANCEL = range(23)
->>>>>>> origin/master:챗봇합체(10).py
 
 
 # 메세지 업데이트
@@ -46,7 +41,6 @@ def build_menu(buttons, n_cols, header_buttons=None, footer_buttons=None):
 def sum(bot, update):
     print("sum")
     dd = solve()
-    print(dd)
     bot.sendMessage(chat_id=update.message.chat_id, text=str(dd))
 
 
@@ -286,7 +280,6 @@ def today(bot, update):
     print("today")
 
     value = today_2()
-    print(value)
 
     if value == 0 :
 
@@ -964,21 +957,13 @@ def today_2():
 def door1(bot, update):
     query = update.callback_query
 
-    bot.send_message(
+    bot.edit_message_text(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"당신의 눈앞에 5가지 색깔 문이 있어요." + "\n" + "이 중에서 당신의 마음에 드는 문을 한가지 선택해주세요."
     )
 
-<<<<<<< HEAD:챗봇합체(11).py
     show_list = []
-=======
-    bot.send_message(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        photo= u'https://pbs.twimg.com/media/DY9aTtFVQAAm2aG.jpg'
-    )
->>>>>>> origin/master:챗봇합체(10).py
 
     show_list.append(InlineKeyboardButton("초록", callback_data=str(GREEN)))
 
@@ -997,11 +982,7 @@ def door1(bot, update):
     bot.edit_message_reply_markup(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-<<<<<<< HEAD:챗봇합체(11).py
         reply_markup=show_markup
-=======
-        text=u"이 중 가장 먼저 보이는 동물 혹은 곤충은 무엇인가요?"
->>>>>>> origin/master:챗봇합체(10).py
     )
 
     return CallbackQueryHandler(callback_get)
@@ -1015,30 +996,26 @@ def number_check(bot, update):
     bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        text=u"제가 당신이 좋아하는 숫자를 맞춰보려고 하는데요!"
+        text=u"제가 당신이 좋아하는 숫자와 당신의 나이를 맞춰보려고 하는데요!"
     )
-    time.sleep(1.0)
 
     bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"제가 지시하는 대로 따라해 주실래요?"
     )
-    time.sleep(1.0)
 
     bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"1부터 10 중에 아.무 숫자나 하나 골라 보세요!"
     )
-    time.sleep(1.0)
 
     bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"고른 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!"
     )
-    time.sleep(1.0)
 
     bot.send_message(
         chat_id=query.message.chat_id,
@@ -1049,34 +1026,27 @@ def number_check(bot, update):
 
 
 def yes(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text='조금 더 저를 어렵게 만들고 싶다면 고른 숫자에 9를 곱하세요!')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='곱한 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='골랐나요? 골랐다면 /yes2 를 눌러 주세요!')
+    bot.sendMessage(chat_id=chat_id, text='조금 더 저를 어렵게 만들고 싶다면 고른 숫자에 9를 곱하세요!')
+    bot.sendMessage(chat_id=chat_id, text='곱한 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!')
+    bot.sendMessage(chat_id=chat_id, text='골랐나요? 골랐다면 /yes2 를 눌러 주세요!')
 
 
 def yes2(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id,
-                    text='그 곱한 수가 한자리면 그냥 냅두고\n두자리라면 각 자리의 숫자를 더해주세요!\nex)4->4, 14->1+4=5')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='나온 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='구했나요? 구했다면 /yes3 를 눌러 주세요!')
+    bot.sendMessage(chat_id=chat_id, text='그 곱한 수가 한자리면 그냥 냅두고\n두자리라면 각 자리의 숫자를 더해주세요!\nex)4->4, 14->1+4=5')
+    bot.sendMessage(chat_id=chat_id, text='나온 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!')
+    bot.sendMessage(chat_id=chat_id, text='구했나요? 구했다면 /yes3 를 눌러 주세요!')
 
 
 def yes3(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text='나온 숫자에 13을 더해주세요!')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='더한 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='더했나요? 더했다면 /yes4 를 눌러 주세요!')
+    bot.sendMessage(chat_id=chat_id, text='나온 숫자에 13을 더해주세요!')
+    bot.sendMessage(chat_id=chat_id, text='더한 숫자는 저를 알려주지 말고 마음속으로만 생각하세요!')
+    bot.sendMessage(chat_id=chat_id, text='더했나요? 더했다면 /yes4 를 눌러 주세요!')
 
 
 def yes4(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text='나온 숫자에 드디어 당신이 좋.아.하.는 숫자를 더해주세요!')
-    time.sleep(1.0)
-    bot.sendMessage(chat_id=update.message.chat_id, text='더해서 나온 값을 입력해 주시겠어요?')
+    bot.sendMessage(chat_id=chat_id, text='나온 숫자에 드디어 당신이 좋.아.하.는 숫자를 더해주세요!')
+    bot.sendMessage(chat_id=chat_id, text='더해서 나온 값을 입력해 주시겠어요?')
+
 
 
 # 문관련 심리테스트
@@ -1291,16 +1261,16 @@ def picture(bot, update):
     query = update.callback_query
     print("test")
 
-    bot.send_message(
+    bot.edit_message_text(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        text=u"가장 마음에 드는 그림을 선택하세요!"
+        text=u"힘들 때 당신이 가장 많이 의지하는 것에 대한 테스트입니다!"
     )
 
-    bot.send_message(
+    bot.send_photo(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        photo = u'https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F998D84385B6B27D52D'
+        photo='https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F998D84385B6B27D52D'
     )
 
     show_list = []
@@ -1315,19 +1285,19 @@ def picture(bot, update):
 
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
 
-    bot.edit_message_text(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        text=u"힘들 때 당신이 가장 많이 의지하는 것에 대한 테스트입니다!"
-    )
-
-    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
 
     bot.edit_message_reply_markup(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         reply_markup=show_markup
     )
+
+    bot.send_photo_reply_markup(
+        chat_id=query.message.chat_id,
+        message_id=query.message.message_id,
+        reply_markup=show_markup
+    )
+
 
     return CallbackQueryHandler(callback_get)
 
@@ -1537,8 +1507,6 @@ def get_message(bot, update):
 
     elif '말' in text:
 
-        print("말")
-
         bot.send_message(chat_id=update.message.chat_id, text='말은 야망이 강한 사람으로 자유롭고 야생적이며 성공하기 위해 노력하는 타입입니다!')
 
         time.sleep(0.7)
@@ -1557,8 +1525,6 @@ def get_message(bot, update):
 
     elif '닭' in text:
 
-        print("닭")
-
         bot.send_message(chat_id=update.message.chat_id, text='닭이 먼저 보였다면 인내심이 강한 타입입니다!')
 
         time.sleep(0.7)
@@ -1572,8 +1538,6 @@ def get_message(bot, update):
 
 
     elif '꽃게' in text:
-
-        print("꽃게")
 
         bot.send_message(chat_id=update.message.chat_id, text='꽃게를 먼저 본 당신은 무뚝뚝하면서도 속은 부드러운 사람입니다!')
 
@@ -1589,8 +1553,6 @@ def get_message(bot, update):
 
     elif '사마귀' in text:
 
-        print("사마귀")
-
         bot.send_message(chat_id=update.message.chat_id, text='사마귀가 먼저 보였다면 직감같은 감각 자체가 뛰어난 사람입니다!')
 
         time.sleep(0.7)
@@ -1604,8 +1566,6 @@ def get_message(bot, update):
 
 
     elif '늑대' in text:
-
-        print("늑대")
 
         bot.send_message(chat_id=update.message.chat_id, text='늑대를 가장 먼저 보았다면\n당신은 부드러운 외면과 사납지만 용기 있는 내면을 가진 사람입니다!')
 
@@ -1621,8 +1581,6 @@ def get_message(bot, update):
 
     elif '강아지' in text:
 
-        print("강아지")
-
         bot.send_message(chat_id=update.message.chat_id, text='강아지가 먼저 눈에 들어왔다면\n성실하고 지조를 갖춘 사람입니다!')
 
         time.sleep(0.7)
@@ -1636,8 +1594,6 @@ def get_message(bot, update):
 
 
     elif '매' in text:
-
-        print("매")
 
         bot.send_mesage(chat_id=update.message.chat_id, text='매는 당신의 정해진 목표를 향해 굳건하게 흔들리지 않으며 날아가는 타입입니다!')
 
@@ -1657,8 +1613,6 @@ def get_message(bot, update):
 
     elif '나비' in text:
 
-        print("나비")
-
         bot.send_message(chat_id=update.message.chat_id, text='나비를 먼저 보았다면 빠른 상황대처 능력을 가져\n적응력이 남들보다 뛰어난 사람입니다!')
 
         time.sleep(0.7)
@@ -1672,8 +1626,6 @@ def get_message(bot, update):
 
 
     elif '비둘기' in text:
-
-        print("비둘기")
 
         bot.send_message(chat_id=update.message.chat_id, text='비둘기를 먼저 보았다면\n인생에서 사랑을 가장 중요하게 생각하는 타입입니다!')
 
@@ -1740,15 +1692,9 @@ def get_message(bot, update):
     if (int(update.message.text) > 22 and int(update.message.text) < 99):
 
         text = int(update.message.text)-22
-        print(text)
-        bot.send_message(chat_id=update.message.chat_id, text='당신이 좋아하는 숫자는 바로바로!')
-        time.sleep(1.0)
-        bot.send_message(chat_id=update.message.chat_id, text='두둥...!!')
-        time.sleep(1.0)
+        bot.sendMessage(chat_id=chat_id, text='당신이 좋아하는 숫자는 바로바로!')
         bot.sendMessage(chat_id=chat_id, text=text)
-        time.sleep(1.0)
         bot.sendMessage(chat_id=chat_id, text='정답이죠?ㅎㅎ')
-        time.sleep(1.5)
         bot.sendMessage(chat_id=chat_id, text='또 다른 테스트를 하고 싶다면 /test 를 눌러주세요!')
 
 
@@ -1800,7 +1746,7 @@ def test(bot, update):
     bot.edit_message_text(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
-        text=u"원하는 걸 선택하세요."
+        text=u"원하는 걸 선택하세요.",
     )
 
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
@@ -1819,11 +1765,11 @@ def realtaro(bot, update):
     print("realtaro")
 
     show_list = []
-    show_list.append(InlineKeyboardButton("생일점", callback_data=str(TARO_B)))
+    show_list.append(InlineKeyboardButton("성격카드", callback_data=str(TARO_B)))
 
     show_list.append(InlineKeyboardButton("오늘의 운세", callback_data=str(TARO_D)))
 
-    show_list.append(InlineKeyboardButton("취소", callback_data=str(CANCEL)))
+    show_list.append(InlineKeyboardButton("취소", callback_data="취소"))
 
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
 
@@ -1849,16 +1795,12 @@ def taro_b(bot, update):
     query = update.callback_query
     print("taro_b")
 
-    bot.edit_message_text(
+    bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"태어난 연도, 월, 일을 입력하세요. ex)20000305"
     )
-    bot.edit_message_text(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        text=u"입력을 마치면 /sum 을 누르세요"
-    )
+
 
 
 #오늘의운세타로
@@ -1866,53 +1808,11 @@ def taro_d(bot, update):
     query = update.callback_query
     print("taro_d")
 
-    bot.edit_message_text(
+    bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"0부터 22까지 마음에 드는 숫자를 골라보세요!"
     )
-    bot.edit_message_text(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        text=u"입력을 마치면 /today 를 누르세요"
-    )
-
-
-
-
-#Q&A 메뉴
-
-def question(bot, update):
-    query = update.callback_query
-
-    print("question")
-
-    show_list = []
-
-    show_list.append(InlineKeyboardButton("1. 총 이용자수", callback_data=str(USER)))
-
-    show_list.append(InlineKeyboardButton("2. 인기 메뉴", callback_data=str(RECOMMAND)))
-
-    show_list.append(InlineKeyboardButton("3.세부사항", callback_data=str(DETAIL)))
-
-    show_list.append(InlineKeyboardButton("4.취소", callback_data=str(CANCEL)))
-
-    show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list) - 1))
-
-    bot.edit_message_text(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        text=u"궁금한 것을 골라줘!"
-    )
-
-    bot.edit_message_reply_markup(
-        chat_id=query.message.chat_id,
-        message_id=query.message.message_id,
-        reply_markup=show_markup
-    )
-    return CallbackQueryHandler(callback_get)
-
-
 
 #Q&A 메뉴
 
@@ -1950,7 +1850,7 @@ def question(bot, update):
 # 심리테스트선택시 호출되는 함수
 def test_menu(bot, update):
     query = update.callback_query
-    print("test_menu")
+    print(test_menu)
 
     show_list = []
 
@@ -1985,7 +1885,7 @@ def test_menu(bot, update):
 def cancel(bot,update):
     query = update.callback_query
 
-    bot.edit_message_text(
+    bot.send_message(
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"취소가 선택되었습니다. 다시 처음으로 돌아가고 싶으면 /start 를 누르세요."
@@ -2007,11 +1907,7 @@ def callback_get(bot, update):
 
     if update.callback_query.data == str(REALTARO):
         uu = realtaro(bot, update)
-<<<<<<< HEAD:챗봇합체(11).py
 
-=======
-        print("hi")
->>>>>>> origin/master:챗봇합체(10).py
     elif update.callback_query.data == str(MENU):
         uu = test_menu(bot, update)
     elif update.callback_query.data == str(QA):
@@ -2032,32 +1928,22 @@ def callback_get(bot, update):
         cur.execute(sql)
         uu = taro_d(bot, update)
 
-<<<<<<< HEAD:챗봇합체(11).py
     # elif update.callback_query.data == str(DOOR):
     #     sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','문','')"
     #     cur.execute(sql)
     #     uu = door(bot, update)
-=======
-    elif update.callback_query.data == str(DOOR):
-        sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','문','')"
-        cur.execute(sql)
-        uu = door(bot, update)
->>>>>>> origin/master:챗봇합체(10).py
 
     elif update.callback_query.data == str(ANIMAL):
         sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','동물','')"
         cur.execute(sql)
         crawl_animal(bot, update)
 
-<<<<<<< HEAD:챗봇합체(11).py
     elif update.callback_query.data == str(DOOR):
         sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','문','')"
         cur.execute(sql)
         uu = door1(bot, update)
 
 
-=======
->>>>>>> origin/master:챗봇합체(10).py
     elif update.callback_query.data == str(PICTURE):
         sql = "INSERT INTO chatbot(sel1, sel2, sel3) VALUES('심리','사진','')"
         cur.execute(sql)
@@ -2079,7 +1965,6 @@ def callback_get(bot, update):
     elif update.callback_query.data == str(GREY):
         uu = grey(bot, update)
     elif update.callback_query.data == str(A):
-<<<<<<< HEAD:챗봇합체(11).py
         uu = a(bot, update)
     elif update.callback_query.data == str(B):
         uu = b(bot, update)
@@ -2089,19 +1974,6 @@ def callback_get(bot, update):
         uu = d(bot, update)
     #elif update.callback_query.data == str(CANCEL):
 
-=======
-        uu = A(bot, update)
-    elif update.callback_query.data == str(B):
-        uu = B(bot, update)
-    elif update.callback_query.data == str(C):
-        uu = C(bot, update)
-    elif update.callback_query.data == str(D):
-        uu = D(bot, update)
-    #elif update.callback_query.data == str(CANCEL):
-
-
-
->>>>>>> origin/master:챗봇합체(10).py
 #DB 저장 및 값가져오기
     con.commit()
 
@@ -2145,41 +2017,25 @@ def user(bot, update):
 
     print("user")
 
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"저희 챗봇의 총 이용자 수가 궁금하시다구요?"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'저희 챗봇의 총 이용자 수는 \"' + str(Sum) + '\"명이에요!'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"더 많은 이용 부탁 드릴게요!!"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"또다른 궁금한 사항이 있다면 /question 을 눌러주세요~"
@@ -2188,15 +2044,6 @@ def user(bot, update):
 
 
 
-<<<<<<< HEAD:챗봇합체(11).py
-=======
-
-
-
-
-
-
->>>>>>> origin/master:챗봇합체(10).py
 # 인기 메뉴
 
 def recommand(bot, update):
@@ -2208,41 +2055,25 @@ def recommand(bot, update):
 
     #Sum = birth + tod + door + animal + photo + number
 
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"무슨 메뉴를 골라야 할지 고민이면"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"가장 인기있는 메뉴를 해보는건 어떨까요?"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'저희 타로심리봇 이용 횟수는 총 \"' + str(Sum) +'\"명인데요!'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"그 중"
@@ -2252,21 +2083,13 @@ def recommand(bot, update):
 
     if (birth >= tod and birth >= door and birth >= animal and birth >= photo and birth >= number):
         Max = birth
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'타로테마의 생일점 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
         )
         time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /taro_b 를 눌러주세요!"
@@ -2276,27 +2099,19 @@ def recommand(bot, update):
     if (tod >= birth and tod >= door and tod >= animal and tod >= photo and tod >= number):
         Max = tod
         if(count!=0):
-<<<<<<< HEAD:챗봇합체(11).py
             bot.send_message(
-=======
-            bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
                 chat_id=query.message.chat_id,
                 message_id=query.message.message_id,
                 text=u"그리고 공동으로"
             )
             time.sleep(0.5)
-        bot.edit_message_text(
+        bot.send_message(
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'타로테마의 오늘의 운세 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
         )
         time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /taro_d 를 눌러주세요!"
@@ -2306,31 +2121,19 @@ def recommand(bot, update):
     if (door >= birth and door >= tod and door >= animal and door >= photo and door >= number):
         Max = door
         if (count != 0):
-<<<<<<< HEAD:챗봇합체(11).py
             bot.send_message(
-=======
-            bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
                 chat_id=query.message.chat_id,
                 message_id=query.message.message_id,
                 text=u"그리고 공동으로"
             )
             time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'심리테마의 문 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
         )
         time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /door 를 눌러주세요!"
@@ -2340,31 +2143,19 @@ def recommand(bot, update):
     if (animal >= birth and animal >= tod and animal >= door and animal >= photo and animal >= number):
         Max = animal
         if (count != 0):
-<<<<<<< HEAD:챗봇합체(11).py
-            bot.send_message_(
-=======
-            bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
+            bot.send_message(
                 chat_id=query.message.chat_id,
                 message_id=query.message.message_id,
                 text=u"그리고 공동으로"
             )
             time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'심리테마의 동물 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
         )
         time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /animal 를 눌러주세요!"
@@ -2374,31 +2165,19 @@ def recommand(bot, update):
     if (photo >= birth and photo >= tod and photo >= door and photo >= animal and photo >= number):
         Max = photo
         if (count != 0):
-<<<<<<< HEAD:챗봇합체(11).py
             bot.send_message(
-=======
-            bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
                 chat_id=query.message.chat_id,
                 message_id=query.message.message_id,
                 text=u"그리고 공동으로"
             )
             time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'심리테마의 사진 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
         )
         time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /photo 를 눌러주세요!"
@@ -2408,31 +2187,19 @@ def recommand(bot, update):
     if (number >= birth and number >= tod and number >= door and number >= animal and number >= photo):
         Max = number
         if (count != 0):
-<<<<<<< HEAD:챗봇합체(11).py
             bot.send_message(
-=======
-            bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
                 chat_id=query.message.chat_id,
                 message_id=query.message.message_id,
                 text=u"그리고 공동으로"
             )
             time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'심리테마의 숫자 메뉴 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
         )
         time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
         bot.send_message(
-=======
-        bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u"이 메뉴를 바로 이용해 보고 싶으시다면 /number 를 눌러주세요!"
@@ -2445,11 +2212,7 @@ def recommand(bot, update):
 
 
     time.sleep(1.0)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"또다른 궁금한 사항이 있다면 /question 을 눌러주세요~"
@@ -2464,131 +2227,79 @@ def detail(bot, update):
 
     print("detail")
 
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"각 테마별 이용자 수를 알고 싶으시다구요?"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"걱정하지 마세요! 제가 알려 드릴게요!!"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'저희 타로심리봇 이용 횟수는 총 \"' + str(Sum) + '\"명인데요!'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"그 중"
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'생일점 이용자 수는 \"' + str(birth) + '\"명'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'오늘의 운세 이용자 수는 \"' + str(tod) + '\"명'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'문 메뉴 이용자 수는 \"' + str(door) + '\"명'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'동물 메뉴 이용자 수는 \"' + str(animal) + '\"명'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'사진 메뉴 이용자 수는 \"' + str(photo) + '\"명'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u'숫자 메뉴 이용자 수는 \"' + str(number) + '\"명'
     )
     time.sleep(0.5)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"입니다! 더 다양한 메뉴들 많이 이용해주세요~"
     )
     time.sleep(1.0)
-<<<<<<< HEAD:챗봇합체(11).py
     bot.send_message(
-=======
-    bot.edit_message_text(
->>>>>>> origin/master:챗봇합체(10).py
         chat_id=query.message.chat_id,
         message_id=query.message.message_id,
         text=u"또다른 궁금한 사항이 있다면 /question 을\n어떤 메뉴를 고릴지 결정하셨다면 /test 를 눌러주세요~"
     )
 
 
-<<<<<<< HEAD:챗봇합체(11).py
-=======
-
->>>>>>> origin/master:챗봇합체(10).py
 
 
 # 메인 함수
@@ -2604,7 +2315,6 @@ if __name__ == '__main__':
     )
 
 
-
     conv_handler2 = ConversationHandler(
         entry_points=[CallbackQueryHandler(callback_get)],
         states={
@@ -2616,15 +2326,7 @@ if __name__ == '__main__':
             DETAIL: [CallbackQueryHandler(detail)],
             TARO_B: [CallbackQueryHandler(taro_b)],
             TARO_D: [CallbackQueryHandler(taro_d)],
-<<<<<<< HEAD:챗봇합체(11).py
             DOOR: [CallbackQueryHandler(door1)],
-=======
-            QA: [CallbackQueryHandler(question)],
-            USER: [CallbackQueryHandler(user)],
-            RECOMMAND: [CallbackQueryHandler(recommand)],
-            DETAIL: [CallbackQueryHandler(detail)],
-            DOOR: [CallbackQueryHandler(door)],
->>>>>>> origin/master:챗봇합체(10).py
             ANIMAL: [CallbackQueryHandler(crawl_animal)],
             PICTURE: [CallbackQueryHandler(picture)],
             NUMBER: [CallbackQueryHandler(number_check)],
@@ -2645,9 +2347,6 @@ if __name__ == '__main__':
 
     updater.dispatcher.add_handler(conv_handler1)
     updater.dispatcher.add_handler(conv_handler2)
-
-
-
     dp.add_handler(CommandHandler('sum', sum))
 
     dp.add_handler(CommandHandler('today', today))
