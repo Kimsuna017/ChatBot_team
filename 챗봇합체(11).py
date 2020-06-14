@@ -2105,7 +2105,7 @@ def recommand(bot, update):
                 text=u"그리고 공동으로"
             )
             time.sleep(0.5)
-        bot.edit_message_text(
+        bot.send_message(
             chat_id=query.message.chat_id,
             message_id=query.message.message_id,
             text=u'타로테마의 오늘의 운세 이용자 수가 \"' + str(Max) + '\"명으로 가장 인기가 많네요!'
@@ -2143,7 +2143,7 @@ def recommand(bot, update):
     if (animal >= birth and animal >= tod and animal >= door and animal >= photo and animal >= number):
         Max = animal
         if (count != 0):
-            bot.send_message_(
+            bot.send_message(
                 chat_id=query.message.chat_id,
                 message_id=query.message.message_id,
                 text=u"그리고 공동으로"
